@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/simplex/bootstrap.min.css" integrity="sha384-FYrl2Nk72fpV6+l3Bymt1zZhnQFK75ipDqPXK0sOR0f/zeOSZ45/tKlsKucQyjSp" crossorigin="anonymous">
+    <link rel="stylesheet" href="static/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js" integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <title>Provider Portal</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+            <a class="navbar-brand" href="#">Provider Portal</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarColor02">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('provider') }}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('stock_history') }}">Historic</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('provider_portal') }}">Stock</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('useradmin') }}">Adm Page</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('initial') }}">Log out</a>
+                    </li>
+                </ul>
+                <form class="d-flex" style="margin-left:550px">
+                    <input class="form-control" type="text" placeholder="What do you need?" style="margin-left:30px">
+                    <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </div>
+      </div>
+</nav>
+<br>
+
+{% block content %}
+
+<h1 align="center">Welcome, {{user.name}} !</h1>
+<div class="container">
+    <table class="table table-sm table-hover">
+        <thead>
+            <th>Id</th>
+            <th>Product</th>
+            <th>Description</th>
+            <th style="width:5%">Price</th>
+            <th>Category</th>
+            <th style="width:4%">Amount</th>
+            <th>Image</th>
+            <th>Provider</th>
+        </thead>
+        <tbody>
+            {% for product in products %}
+                <tr>
+                    <td >{{loop.index}}</td>
+                    <td >{{product.name}}</td>
+                    <td>{{product.description}}</td>
+                    <td>{{product.origin_price}}</td>
+                    <td>{{product.category}}</td>
+                    <td>{{product.amount}}</td>
+                    <td>{{product.image}}</td>
+                    <td>{{product.provider}}</td>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <button id="myBtn" class="btn btn-primary" style="margin-bottom:5%; margin-left:5%; max-width:15%">Add Stock</button>
+<!-- The Modal -->
+
+    <div class="modal" id="myModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" style="min-width:300px">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add Stock</h5>
+                        <span class="close">&times;</span>
+                </div>
+                    <div class="modal-body">
+                        <p>
+                        <form action="{{url_for('add_stock')}}" method="post" style="width:100%; margin:0 auto">
+                            <div class="form-group" style="width:100%; margin:0 auto">
+                                <select class="form-select" id="exampleSelect1" style="width:100%; margin:0 auto" name="product_name">
+                                    {% for product in products %}
+                                        <option style="width:100%; margin:0 auto">{{product.name}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="form-group" style="width:120px; margin:auto">
+                                <label class="col-form-label mt-1" for="new_name" style="">Amount</label>
+                                <input type="text" class="form-control" placeholder="Amount" value="1" min="1" name="product_amount">
+                            </div>
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Add</button>
+                    </form>
+                    </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+{% endblock %}
+</body>
+</html>
+<script>
+
+    // Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the span element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on the button, open the modal
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on span (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>

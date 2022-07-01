@@ -1,0 +1,33 @@
+{% extends "provider.html" %}
+
+{% block content %}
+
+
+{% for stock in stock %}
+    <div class="card bg-light mb-3" style="max-width: 80%; border-style: ridge;margin-left:10%" align="center">
+    <div class="card-header" style="border-style: ridge;">Operation #{{stock[0]}}  |  Company : {{stock[2]}} | Date : {{stock[1]}}</div>
+    <div class="card-body" style="box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;">
+        <table class="table table-hover table-striped" style="border-style: outset; table-layout: fixed;">
+            <thead>
+                <tr>
+                <th scope="col" style="width:60%;">Product</th>
+                <th scope="col">Amount</th>
+                <th scope="col">Price</th>
+                <th scope="col">Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                    <tr class="table-active">
+                    <th scope="row" style="width:60%;">{{stock[5]}}</th>
+                    <td style="text-align: center">{{stock[4]}}</td>
+                    <td style="text-align: center">{{stock[3]/stock[4]}}</td>
+                    <td style="text-align: center">{{stock[3]}}</td>
+                    </tr>
+              </tbody>
+        </table>
+    </div>
+    </div>
+
+
+{% endfor %}
+{% endblock %}

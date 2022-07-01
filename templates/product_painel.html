@@ -1,0 +1,201 @@
+{% extends "useradmin.html" %}
+
+{% block content %}
+<div class="panel panel-default" style="margin-left:5%; margin-right:5%">
+    <div class="panel-heading">Produtos</div>
+        <div class="panel-body">
+            <div class="table-responsive">
+                <table id="sample_data" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th style="width:200px">Name </th>
+                            <th style="width:300px">Description</th>
+                            <th>Category</th>
+                            <th>Amount</th>
+                            <th>Price</th>
+                            <th>Image</th>
+                            <th>X</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for row in products %}
+                        <tr>
+                            <td data-pk="{{row.id}}">{{row.id}}</td>
+                            <td data-name="name" class="name" data-type="text" data-pk="{{row.id}}">{{row.name}}</td>
+                            <td data-name="description" class="description" data-type="text" data-pk="{{row.id}}">{{row.description}}</td>
+                            <td data-name="category" class="category" data-type="text" data-pk="{{row.id}}">{{row.category}}</td>
+                            <td data-name="amount" class="amount" data-type="text" data-pk="{{row.id}}">{{row.amount}}</td>
+                            <td data-name="price" class="price" data-type="text" data-pk="{{row.id}}">{{row.price}}</td>
+                            <td data-name="image" class="image" data-type="text" data-pk="{{row.id}}" style="widht:10%">{{row.image}}</td>
+                            <td><a href="/delete_product/{{row.id}}" style="text-decoration:none; widht:50%">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                    <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                                </svg>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Trigger/Open The Modal -->
+<button id="myBtn" class="btn btn-primary" style="margin-bottom:5%; margin-left:5%; max-width:15%">Add New Product</button>
+<!-- The Modal -->
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+            <p>
+              <form action="{{url_for('add_product')}}" method="post">
+                <div class="form-group" style="width:75%; margin-left:5%">
+                    <label class="col-form-label mt-4" for="new_name">New Product</label>
+                    <input type="text" class="form-control" placeholder="New Product" name="product_name">
+                </div>
+                <div class="form-group"style="width:90%; margin-left:5%">
+                    <label class="col-form-label mt-4" for="new_name">Description</label>
+                    <input type="text" class="form-control" placeholder="Description" name="product_description">
+                </div>
+                <div class="form-group" style="width:80px; margin-left:5%">
+                    <label class="col-form-label mt-4" for="new_name">Price</label>
+                    <input type="text" class="form-control" placeholder="$" name="product_price">
+                </div>
+                <div class="form-group" style="margin-left:5%">
+                    <label class="col-form-label mt-4" for="new_name">Category</label>
+                    <select class="form-select " name="product_category">
+                        <option>Notebook</option>
+                        <option>Monitor</option>
+                        <option>CPU</option>
+                        <option>Acessórios</option>
+                        <option>Telemóvel</option>
+                    </select>
+                </div>
+                <div class="form-group" style="width:120px; margin-left:5%">
+                    <label class="col-form-label mt-4" for="new_name">Amount</label>
+                    <input type="text" class="form-control" placeholder="Amount" value="1" min="1" name="product_amount">
+                </div>
+                <div class="form-group" style="width:75%; margin-left:5%">
+                    <label class="col-form-label mt-4" for="new_name">Image</label>
+                    <input type="text" class="form-control" placeholder="New Image" value="None" name="product_image">
+                </div>
+                <button type="submit" class="btn btn-outline-primary" style="margin-left:5%">Add product</button>
+              </form>
+            </p>
+    </div>
+<script>
+    // Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the span element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on the button, open the modal
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on span (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+
+
+$(document).ready(function(){
+    var dataTable = $('#sample_data').DataTable();
+    $('#sample_data').editable({
+        container:'body',
+        selector:'td.name',
+        url:'/update_product',
+        title:'Name',
+        type:'POST',
+        validate:function(value){
+            if($.trim(value) == '')
+            {
+                return 'This field is required';
+            }
+        }
+    });
+
+    $('#sample_data').editable({
+        container:'body',
+        selector:'td.amount',
+        url:'/update_product',
+        title:'Amount',
+        type:'POST',
+        validate:function(value){
+            if($.trim(value) == '')
+            {
+                return 'This field is required';
+            }
+        }
+    });
+
+    $('#sample_data').editable({
+        container:'body',
+        selector:'td.description',
+        url:'/update_product',
+        title:'Description',
+        type:'POST',
+        validate:function(value){
+            if($.trim(value) == '')
+            {
+                return 'This field is required';
+            }
+        }
+    });
+
+    $('#sample_data').editable({
+        container:'body',
+        selector:'td.category',
+        url:'/update_product',
+        title:'Category',
+        type:'POST',
+        validate:function(value){
+            if($.trim(value) == '')
+            {
+                return 'This field is required';
+            }
+        }
+    });
+    $('#sample_data').editable({
+        container:'body',
+        selector:'td.image',
+        url:'/update_product',
+        title:'Image',
+        type:'POST',
+        validate:function(value){
+            if($.trim(value) == '')
+            {
+                return 'This field is required';
+            }
+        }
+    });
+
+    $('#sample_data').editable({
+        container:'body',
+        selector:'td.price',
+        url:'/update_product',
+        title:'Price',
+        type:'POST',
+        validate:function(value){
+            if($.trim(value) == '')
+            {
+                return 'This field is required';
+            }
+        }
+    });
+});
+</script>
+{% endblock %}

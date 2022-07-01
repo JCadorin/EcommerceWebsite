@@ -1,0 +1,91 @@
+{% extends "provider_portal.html" %}
+
+
+{% block content %}
+<div class="card mb-3" style="width:25%; height:80vh; float: top left; margin:5px">
+      <h3 class="card-header">Welcome, {{user.name}}!</h3>
+      <div class="card-body">
+          <h4 align="center">Profile</h4>
+          <h5>Name:</h5>
+          <p style="margin-left:15%">{{user.name}} {{user.surname}}</p>
+          <h5>Company:</h5>
+          <p style="margin-left:15%">{{user.company}}</p>
+          <h5>NIF:</h5>
+          <p style="margin-left:15%">{{user.nif}}</p>
+          <h5>Address:</h5>
+          <p style="margin-left:15%">{{user.address}}</p>
+          <h5>Telephone:</h5>
+          <p style="margin-left:15%">{{user.telephone}}</p>
+      </div>
+      <div class="card-body">
+          <a href="#" class="card-link">Edit Profile</a>
+      </div>
+      <div class="card-footer text-muted">
+      </div>
+</div>
+
+<div class="card bg-light mb-3" style="margin-right:3%; width:25%; max-height:25%; position: absolute; top: 90px; right: 45%;">
+    <div class="card-header">Popular Products</div>
+        <table class="table btn-block table-striped" style="width:100%">
+            <thead style="top: 0; z-index: 1; background-color:white">
+                <tr style="width:100%">
+                    <th scope="col" style="width:300px">Product</th>
+                    <th scope="col" style="width:20%">Qt</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in sell %}
+                    <tr>
+                        <td style="width:300px">{{product[0]}}</td>
+                        <td>{{product[1]}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+</div>
+
+<div id="monthly" class="cardchart bg-light mb-3" style="margin-left:5%; margin-right:5%; width:35%; position: absolute; top: 90px; right: 5%;">
+    <div class="card-header">Monthly Profit</div>
+        <div class="card-body">
+            <div class="chart-container" style="position: relative;">
+                <canvas id="moChart"></canvas>
+            </div>
+        </div>
+</div>
+
+<script>
+let month_value = JSON.parse({{month_value | tojson }});
+let month = JSON.parse({{month | tojson }});
+const ctx1 = document.getElementById('moChart');
+const moChart = new Chart(ctx1, {
+    type: 'bar',
+    data: {
+        labels: month,
+        datasets: [{
+            label: '$ in products',
+            data: month_value,
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+</script>
+{% endblock %}

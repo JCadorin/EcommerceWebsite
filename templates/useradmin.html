@@ -1,0 +1,337 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Admin Portal</title>
+    <!-- ****** style.css ****** -->
+        <link rel="stylesheet" href="static/style.css">
+    <!-- ****** bootstrap style ****** -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/simplex/bootstrap.min.css" integrity="sha384-FYrl2Nk72fpV6+l3Bymt1zZhnQFK75ipDqPXK0sOR0f/zeOSZ45/tKlsKucQyjSp" crossorigin="anonymous">
+    <!-- ******  ****** -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <!-- ******  ****** -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+    <!-- ****** Table adm ****** -->
+        <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css" />
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.1/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.1/bootstrap3-editable/js/bootstrap-editable.js"></script>
+        <!-- ****** Graph ****** -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js" integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    </head>
+
+    <body>
+    <!--****** Nav Bar ******-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Admin Portal</a>
+                    <div class="collapse navbar-collapse" id="navbarColor02">
+                        <ul class="navbar-nav me-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url_for('useradmin') }}">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url_for('sales') }}">Sales</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url_for('product_painel') }}">Products</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url_for('customer') }}">Shop</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url_for('provider') }}">Supply</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url_for('initial') }}">Log out</a>
+                            </li>
+    <!--****** Notification icon ******-->
+                            <li class="nav-item" style="margin-left:5px">
+                                <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="25px" height="25px" fill="red" class="bi bi-app-indicator" viewBox="0 0 16 16">
+                                    <path d="M5.5 2A3.5 3.5 0 0 0 2 5.5v5A3.5 3.5 0 0 0 5.5 14h5a3.5 3.5 0 0 0 3.5-3.5V8a.5.5 0 0 1 1 0v2.5a4.5 4.5 0 0 1-4.5 4.5h-5A4.5 4.5 0 0 1 1 10.5v-5A4.5 4.5 0 0 1 5.5 1H8a.5.5 0 0 1 0 1H5.5z"/>
+                                    <path d="M16 3a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                                    </svg>
+                                </a>
+                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                                         aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document" style="top: 40px;
+                                         right: 23%; width:40rem">
+                                        <div class="card bg-secondary mb-3" style="width: 40rem; padding:1px">
+                                            <div class="card-header">Notifications</div>
+                                            <div class="card-body">
+                                                <table class="table btn-block" style="width:100%; height:100%; overflow:hidden; overflow-y:scroll">
+                                                    <thead style="position: -webkit-sticky; position: sticky; top: 0; z-index: 1; background-color:white">
+                                                        <tr>
+                                                            <th scope="col" style="width:50%">All</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody style="width:100%; height:100%;">
+                                                    {% for product in product_ending %}
+                                                        <tr class="table-active" >
+                                                            <td style="border: 3px solid white">O {{product.name}} está com {{product.amount}} unidade(s) em stock. Convém pedir reposição.</td>
+                                                        </tr>
+                                                    {% endfor %}
+    <!--****** End Notification  ******-->
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                        <form class="d-flex" style="margin-left:550px; margin-top:10px">
+                            <input class="form-control" type="text" placeholder="What do you need?" style="margin-left:30px;">
+                                <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+                        </form>
+                    </div>
+            </div>
+        </nav>
+    <!--****** End Nav Bar ******-->
+        {% block content %}
+            <div class="container">
+                <h1 align="center">Welcome, {{nome_utilizador}} !</h1>
+                <br/>
+            </div>
+    <!--****** Chart Boxes ******-->
+            <div class="wrapper" style="">
+                <div class="menu">
+                    <select id="name" style="width:35%; padding:15px; border-radius:8px; border:2px solid #3f51b5;
+                     margin-left: 5%">
+                        <option value="monthly">Monthly</option>
+                        <option value="weekly">Weekly</option>
+                        <option value="daily">Daily</option>
+                    </select>
+                </div>
+            <div class="content">
+                <div id="weekly" class="cardchart bg-light mb-3" style="margin-left:5%; margin-right:5%; float:left; min-width:35%; display:none">
+                    <div class="card-header">Weekly Sales</div>
+                        <div class="card-body">
+                            <div class="chart-container" style="position: relative;">
+                                <canvas id="myChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                <div id="monthly" class="cardchart bg-light mb-3" style="margin-left:5%; margin-right:5%; float:left;min-width:35%; display:none">
+                    <div class="card-header">Monthly Sales and supplies cost</div>
+                        <div class="card-body">
+                            <div class="chart-container" style="position: relative;">
+                                <canvas id="moChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                <div id="daily" class="cardchart bg-light mb-3" style="margin-left:5%; margin-right:5%; float:left;min-width:35%; display:none">
+                    <div class="card-header">Daily Sales</div>
+                        <div class="card-body">
+                            <div class="chart-container" style="position: relative;">
+                                <canvas id="daChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+                <div class="card bg-light mb-3" style="margin-right:3px; max-width:25%; max-height:25%; float:left">
+                    <div class="card-header">Category Popularity</div>
+                        <div class="card-body">
+                            <div class="chart-container" style="position: relative;">
+                                <canvas id="catChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+    <!--****** End Chart Boxes ******-->
+    <!--itens -->
+            <div class="card bg-light mb-3" style="margin-right:3%; max-width:25%; max-height:25%; float:right">
+                  <div class="card-header">Top Sales Products</div>
+                  <table class="table btn-block">
+                        <thead style="top: 0; z-index: 1; background-color:white">
+                        <tr>
+                            <th scope="col" style="">Product</th>
+                            <th scope="col">Qt</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for product in top %}
+                            <tr>
+                                <td>{{product.product}}</td>
+                                <td>{{product[1]}}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                  </table>
+            </div>
+            </div>
+    <!--****** Week Chart ******-->
+<script>
+let week_value = JSON.parse({{week_value | tojson }});
+let date = JSON.parse({{date | tojson }});
+const ctx = document.getElementById('myChart');
+const myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: date,
+        datasets: [{
+            label: '$ of Sales',
+            data: week_value,
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+</script>
+    <!--****** Month Chart ******-->
+<script>
+let month_value = JSON.parse({{month_value | tojson }});
+let month = JSON.parse({{month | tojson }});
+let month_stock = JSON.parse({{month_stock | tojson }});
+let month_st = JSON.parse({{month_st | tojson }});
+const ctx1 = document.getElementById('moChart');
+const moChart = new Chart(ctx1, {
+    type: 'bar',
+    data: {
+        labels: month,
+        datasets: [{
+            label: '$ of Sales',
+            data: month_value,
+            backgroundColor: [
+                'rgba(54, 162, 235, 0.2)'
+            ],
+            borderColor: [
+                'rgba(54, 162, 235, 1)'
+            ],
+            borderWidth: 1
+        },
+        {
+            label: '$ to supplies',
+            data: month_stock,
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)'
+            ],
+            borderWidth: 1
+        }
+        ]
+    },
+    options: {
+        responsive: true,
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+</script>
+    <!--****** Day Chart ******-->
+<script>
+let day_value = JSON.parse({{day_value | tojson }});
+let day = JSON.parse({{day | tojson }});
+const ctx2 = document.getElementById('daChart');
+const daChart = new Chart(ctx2, {
+    type: 'bar',
+    data: {
+        labels: day,
+        datasets: [{
+            label: '$ of Sales',
+            data: day_value,
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+</script>
+    <!--****** Category Pie Chart ******-->
+<script>
+let category_value = JSON.parse({{category_value | tojson }});
+let category = JSON.parse({{category | tojson }});
+const ctx3 = document.getElementById('catChart');
+const catChart = new Chart(ctx3, {
+    type: 'pie',
+    data: {
+        labels: category,
+        datasets: [{
+            label: '# of Sales',
+            data: category_value,
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(252, 157, 98, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(252, 157, 98, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+
+        }
+    }
+});
+</script>
+<script>
+
+    $(document).ready(function(){
+        $("#name").on('change', function(){
+            $(".cardchart").hide();
+            $("#" + $(this).val()).fadeIn(700);
+        }).change();
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        {% endblock %}
+        </div>
+    <footer>
+        <p>Author: Jefferson Cadorin<br>
+        <a href="mailto:jeffersonvcadorin@gmail.com">jeffersonvcadorin@gmail.com</a></p>
+    </footer>
+    </body>
+</html>

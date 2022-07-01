@@ -1,0 +1,42 @@
+{% extends "useradmin.html" %}
+
+{% block content %}
+
+
+{% for order in orders %}
+    <div class="card bg-light mb-3" style="max-width: 80%; border-style: ridge;margin-left:10%" align="center">
+    <div class="card-header" style="border-style: ridge;">Sale #{{order.id}}  |  Client : {{order.customer_id}} | Date : {{order.order_date}}</div>
+    <div class="card-body" style="box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;">
+        <table class="table table-hover table-striped" style="border-style: outset;">
+            <thead>
+                <tr>
+                <th scope="col">Product</th>
+                <th scope="col">Amount</th>
+                <th scope="col">Price</th>
+                <th scope="col">Total</th>
+                </tr>
+              </thead>
+              <tbody>
+
+              {% for product in order.products %}
+                    <tr class="table-active">
+                    <th scope="row">{{product.product}}</th>
+                    <td>{{product.amount}}</td>
+                    <td>{{product.price}}</td>
+                    <td>{{product.price*product.amount}}</td>
+                    </tr>
+              {% endfor %}
+              </tbody>
+              <tfoot>
+              <td style="font-weight: bold;">Total</td>
+              <td></td>
+              <td></td>
+              <td>{{order.total}}</td>
+              </tfoot>
+        </table>
+    </div>
+    </div>
+
+
+{% endfor %}
+{% endblock %}
