@@ -63,9 +63,6 @@ class Product(db.Model):
     provider = db.Column(db.String(50))
     origin_price = db.Column(db.Integer)
 
-    def __repr__(self):
-        return '<Product %r>' % self.name
-
 
 # CLASS Kart
 class Kart(db.Model):
@@ -76,9 +73,6 @@ class Kart(db.Model):
     amount = db.Column(db.Integer)
     price = db.Column(db.Integer)
     provider = db.Column(db.String(50))
-
-    def __repr__(self):
-        return '<Product %r>' % self.name
 
 
 # CLASS Orders
@@ -103,7 +97,7 @@ class Stock(db.Model):
     product = db.Column(db.String(50))
 
 
-db.create_all()  # Table criation
+db.create_all()  # Table creation
 db.session.commit()  # Execution of all the pending task on database 
 
 
