@@ -1,6 +1,6 @@
 # Ecommerce Website
 
- Project made for my course conclusion in python module for Tokio School. It is a fictional informatic store built with Python 
+ Project made for my course conclusion in python module. It is a fictional informatic store built with Python 
 and HTML/CSS using packages as SQL and Flask.
 
 # [MAIN POINTS] #
