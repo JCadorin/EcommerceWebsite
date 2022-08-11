@@ -45,7 +45,9 @@ Provider:
      - Top sold itens 
      - Product sell history by day, week and month
      - Pie graph of sold product amount
-   * Product edit function
+   * Product create/edit/delete function
+   * Provider Painel acess like
+   * Customer Painel acess like
    
    
    
