@@ -3,14 +3,14 @@
  Project made for my course conclusion in python module. It is a fictional informatic store built with Python 
 and HTML/CSS using packages as SQL and Flask.
 
-# [MAIN POINTS] #
+## MAIN POINTS
 
 * The main focus of this project is to show my skills with database management, query commands and python language in general, most 
 of the website's interface I did with HTML and CSS was using bootstrap for a consistent grafic design.
 * Graph Visualization built with JavaScript
 * Client Data was created by faker function and product data was collected radomly in some real store to create a more realistic experience.  
 
-# [OVERVIEW] #
+## OVERVIEW
 
 WebSite with a basic login page giving the possibility to three differents acess level (client, provider , administrator) each one with their own functionality, 
 permissions, layout, informations and graphs. 
