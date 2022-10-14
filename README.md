@@ -11,11 +11,14 @@ of the website's interface I did with HTML and CSS was using bootstrap for a con
 * Client Data was created by faker function and product data was collected radomly in some real store to create a more realistic experience.  
 
 ## OVERVIEW
+WebSite with a basic login page giving the possibility to three differents acess level (client, provider , administrator) each one with their own functionality, permissions, layout, informations and graphs.  
+  
+![store](store.png)  
+<sub>Customer main page</sub>  
+  
+  
+## Customer:
 
-WebSite with a basic login page giving the possibility to three differents acess level (client, provider , administrator) each one with their own functionality, 
-permissions, layout, informations and graphs. 
-
-Client:
   Each client have their own account information, purchase history and the option to hold products on kart before make the
   purchase, even after log out. The Client page contains acess to:
 
@@ -25,7 +28,7 @@ Client:
  * Purchase History
  
  
-Provider:
+### Provider:  
   Each provider has they own brand and products, having acess to their products sell history and some other relevant graphs 
   to see sell evolution over the time. The Provider page contains access to:
   
@@ -33,23 +36,30 @@ Provider:
      - Top sold itens of the provider's company
      - Provider's product sell history by day, week and month
      - Pie graph of sold product amount
- * Product Inventory
+ * Product Inventory 
      - Reposition function
  * Account Information
- 
- Administrator:
-   Mother access having the permission to go through all the other access, incluiding the possibility to use all the functions
-   the others levels have, including the permission to do purchases as a client and to see the providers graphs ( When with
-   provider access, have the vision of all the brands as one). The Administrator page contains access to:
-   * Sell Visualization Graphs 
-     - Top sold itens 
-     - Product sell history by day, week and month
-     - Pie graph of sold product amount
-   * Product create/edit/delete function
-   * Provider Painel acess like
-   * Customer Painel acess like
+  
+ ![prov](stocks.png)  
    
-   
+ ### Administrator:    
+Mother access having the permission to go through all the other access, incluiding the possibility to use all the functions  
+the others levels have, including the permission to do purchases as a client and to see the providers graphs ( When with  
+provider access, have the vision of all the brands as one). The Administrator page contains access to:  
+* Sell Visualization Graphs 
+  - Top sold itens 
+  - Product sell history by day, week and month
+  - Pie graph of sold product amount
+* Product create/edit/delete function
+* Provider Painel acess like
+* Customer Painel acess like  
+  
+![adm](novo_welcome.png)  
+<sub>Administrator main page.</sub>   
+  
+  
+![change](item_change.png)  
+<sub>Item edition on adm page.</sub>   
    
    
    
