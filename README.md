@@ -41,7 +41,9 @@ WebSite with a basic login page giving the possibility to three differents acess
  * Account Information
   
  ![prov](stocks.png)  
-   
+ <sub>Stock Reposition page</sub> 
+
+
  ### Administrator:    
 Mother access having the permission to go through all the other access, incluiding the possibility to use all the functions  
 the others levels have, including the permission to do purchases as a client and to see the providers graphs ( When with  
