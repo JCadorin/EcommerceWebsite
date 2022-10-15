@@ -43,7 +43,7 @@ each one with their own functionality, permissions, layout, informations and gra
      - Reposition function
  * Account Information
   
- ![prov](stocks.png)  
+ ![prov](stock_page.png)  
  <sub>Stock Reposition page</sub> 
 
 
@@ -60,7 +60,7 @@ The Administrator page contains access to:
 * Provider Painel acess like
 * Customer Painel acess like  
   
-![adm](novo_welcome.png)  
+![adm](adm_page.png)  
 <sub>Administrator main page.</sub>   
   
   
